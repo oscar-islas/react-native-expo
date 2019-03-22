@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {
+  AppRegistry,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -32,6 +34,8 @@ export default class LoginScreen1 extends Component {
   }
 
   async componentDidMount() {
+
+    StatusBar.setHidden(true);
     await Font.loadAsync({
       georgia: require('../../../assets/fonts/Georgia.ttf'),
       regular: require('../../../assets/fonts/Montserrat-Regular.ttf'),
@@ -57,6 +61,7 @@ export default class LoginScreen1 extends Component {
   }
 
   render() {
+
     const { email, password, email_valid, showLoading } = this.state;
 
     return (
@@ -75,7 +80,7 @@ export default class LoginScreen1 extends Component {
                   leftIcon={
                     <Icon
                       name="user-o"
-                      color="#000"
+                      color="#acadad"
                       size={20}
                     />
                   }
@@ -107,7 +112,7 @@ export default class LoginScreen1 extends Component {
                   leftIcon={
                     <Icon
                       name="lock"
-                      color="#000"
+                      color="#acadad"
                       size={20}
                     />
                   }
@@ -147,7 +152,9 @@ export default class LoginScreen1 extends Component {
                   loadingProps={{ size: 'small', color: '#000' }}
                   disabled={!email_valid && password.length < 8}
                 />
-                <Text style={{ color: 'white', marginTop: 10, textAlign: 'center' }}>Olvidé mi contraseña</Text>
+                <Text
+                style={{ color: 'white', marginTop: 10, textAlign: 'center' }}
+                onPress={() => this.props.navigation.navigate('ListsDrawerItem')}>Olvidé mi contraseña</Text>
               </View>
             </View>
           ) : (

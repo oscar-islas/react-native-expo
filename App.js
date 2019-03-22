@@ -2,7 +2,7 @@ import React from 'react';
 import { registerRootComponent, AppLoading, Asset, Font } from 'expo';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { View, Image, Dimensions } from 'react-native';
-import { DrawerNavigator, DrawerItems } from 'react-navigation';
+import { StackNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 
 import Components from './src/drawer/components';
 import Ratings from './src/drawer/ratings';
