@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StackNavigator } from 'react-navigation';
 import {
   Alert,
   LayoutAnimation,
@@ -14,7 +15,6 @@ import {
 } from 'react-native';
 import { Font } from 'expo';
 import { Input, Button } from 'react-native-elements';
-
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 // Enable LayoutAnimation on Android
@@ -28,7 +28,7 @@ const USER_HP = require('../../../assets/images/user-hp.png');
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-export default class LoginScreen3 extends Component {
+export default class ValidateUser extends Component {
   constructor(props) {
     super(props);
 
@@ -53,6 +53,10 @@ export default class LoginScreen3 extends Component {
       this
     );
     this.signup = this.signup.bind(this);
+  }
+
+  static navigationOptions = {
+    header: null
   }
 
   async componentDidMount() {
@@ -423,3 +427,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+
+// export default StackNavigator({
+//   Login: {
+//     screen: Login,
+//   },
+//   ValidateUser: {
+//     screen: ValidateUser,
+//   }
+// },{ headerMode: 'none' });
