@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { createStackNavigator, createAppContainer } from "react-navigation";
 import {
-  AppRegistry,
-  StatusBar,
   StyleSheet,
   Text,
   View,
   Image,
   ImageBackground,
   Dimensions,
+  ScrollView,
+  StatusBar,
 } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
@@ -19,7 +20,8 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../assets/images/mapa.jpg');
 
-export default class LoginScreen1 extends Component {
+class Login extends Component {
+
   constructor(props) {
     super(props);
 
@@ -33,8 +35,11 @@ export default class LoginScreen1 extends Component {
     };
   }
 
-  async componentDidMount() {
+  static navigationOptions = {
+      header: null
+  }
 
+  async componentDidMount() {
     StatusBar.setHidden(true);
     await Font.loadAsync({
       georgia: require('../../../assets/fonts/Georgia.ttf'),
@@ -61,14 +66,13 @@ export default class LoginScreen1 extends Component {
   }
 
   render() {
-
     const { email, password, email_valid, showLoading } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={styles.logoContainerHeader}>
           <Image
-            source={require('../../images/logo.png')}
+            source={require('../../../assets/logo.png')}
             style={styles.logoImageHeader}
           />
         </View>
@@ -80,7 +84,7 @@ export default class LoginScreen1 extends Component {
                   leftIcon={
                     <Icon
                       name="user-o"
-                      color="#acadad"
+                      color="#000"
                       size={20}
                     />
                   }
@@ -112,7 +116,7 @@ export default class LoginScreen1 extends Component {
                   leftIcon={
                     <Icon
                       name="lock"
-                      color="#acadad"
+                      color="#000"
                       size={20}
                     />
                   }
@@ -153,8 +157,8 @@ export default class LoginScreen1 extends Component {
                   disabled={!email_valid && password.length < 8}
                 />
                 <Text
-                style={{ color: 'white', marginTop: 10, textAlign: 'center' }}
-                onPress={() => this.props.navigation.navigate('ListsDrawerItem')}>Olvidé mi contraseña</Text>
+                  style={{ color: 'white', marginTop: 10, textAlign: 'center' }}
+                >Olvidé mi contraseña</Text>
               </View>
             </View>
           ) : (
@@ -221,3 +225,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: Login
+  }
+});
+
+export default createAppContainer(AppNavigator);
