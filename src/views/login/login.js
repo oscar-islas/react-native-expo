@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 
-import { Font } from 'expo';
+import { Font, Constants } from 'expo';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -20,7 +20,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const BG_IMAGE = require('../../../assets/images/mapa.jpg');
 
-class Login extends Component {
+export default class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -36,11 +36,10 @@ class Login extends Component {
   }
 
   static navigationOptions = {
-      header: null
+    header: null
   }
 
   async componentDidMount() {
-    StatusBar.setHidden(true);
     await Font.loadAsync({
       georgia: require('../../../assets/fonts/Georgia.ttf'),
       regular: require('../../../assets/fonts/Montserrat-Regular.ttf'),
@@ -158,6 +157,7 @@ class Login extends Component {
                 />
                 <Text
                   style={{ color: 'white', marginTop: 10, textAlign: 'center' }}
+                  onPress={() => this.props.navigation.navigate('ValidateUserView')}
                 >Olvidé mi contraseña</Text>
               </View>
             </View>
@@ -173,6 +173,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Constants.statusBarHeight,
   },
   bgImage: {
     flex: 1,
@@ -224,12 +225,5 @@ const styles = StyleSheet.create({
     flex: 0.5,
     justifyContent: 'center',
   },
-});
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: Login
-  }
 });
-
-export default createAppContainer(AppNavigator);
