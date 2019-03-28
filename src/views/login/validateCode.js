@@ -21,7 +21,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BG_IMAGE = require('../../../assets/images/mapa-blanco.jpg');
 
-export default class ValidateUser extends Component {
+export default class ValidateCode extends Component {
   static navigationOptions = {
     headerStyle: {
       backgroundColor: 'transparent',
@@ -41,21 +41,25 @@ export default class ValidateUser extends Component {
             <Text
               style={{ color: 'rgb(101,101,101)', marginBottom: 20, fontSize: 18,  textAlign: 'center' }}
             >Recuperar Contrasena</Text>
+            <Text style={{color: 'rgb(101,101,101)', marginBottom: 10, fontSize: 14,  textAlign: 'center'}}>
+              Hemos enviado un codigo a la direccion de correo electronico enlazada al usuario {"\n"}
+              Ingresa el codigo en el siguiente recuadro
+            </Text>
             <View>
               <Input
                 inputStyle={{ width: 300, marginLeft: 10, color: '#FFF' }}
                 placeholderTextColor="#F1F1F1"
                 inputContainerStyle={{borderBottomWidth: 0}}
                 containerStyle={{ width: 300, marginVertical: 10, marginBottom: 40, backgroundColor: 'rgb(101,101,101)', borderRadius: 2}}
-                placeholder='Usuario'
+                placeholder='Codigo'
               />
             </View>
             <View>
               <Button
                 titleStyle={{color: "#FFF"}}
                 buttonStyle={styles.sendButton}
-                title="Enviar"
-                onPress={()=> this.props.navigation.navigate('ValidateCodeView')}
+                title="Validar Codigo"
+                onPress={()=> this.props.navigation.navigate('NewPasswordFormView')}           
               />
             </View>
           </KeyboardAvoidingView>
@@ -100,4 +104,5 @@ const styles = StyleSheet.create({
     width: 150,
     backgroundColor: "rgb(237, 44, 56)",
   },
+
 });

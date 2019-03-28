@@ -21,7 +21,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BG_IMAGE = require('../../../assets/images/mapa-blanco.jpg');
 
-export default class ValidateUser extends Component {
+export default class NewPasswordForm extends Component {
   static navigationOptions = {
     headerStyle: {
       backgroundColor: 'transparent',
@@ -40,22 +40,35 @@ export default class ValidateUser extends Component {
           <KeyboardAvoidingView style={styles.formContainer} behavior="padding" enabled>
             <Text
               style={{ color: 'rgb(101,101,101)', marginBottom: 20, fontSize: 18,  textAlign: 'center' }}
-            >Recuperar Contrasena</Text>
+            >Restablecer Contrasena</Text>
+            <Text
+              style={{ color: 'rgb(101,101,101)', marginBottom: 20, fontSize: 14, paddingLeft: 20, paddingRight: 20, textAlign: 'center' }}>
+              Ingresa tu nueva contrasena conformada por 8 caracteres
+            </Text>
             <View>
               <Input
                 inputStyle={{ width: 300, marginLeft: 10, color: '#FFF' }}
                 placeholderTextColor="#F1F1F1"
+                secureTextEntry={true}
+                inputContainerStyle={{borderBottomWidth: 0}}
+                containerStyle={{ width: 300, marginVertical: 10, marginBottom: 10, backgroundColor: 'rgb(101,101,101)', borderRadius: 2}}
+                placeholder='Nueva Contrasena'
+              />
+              <Input
+                inputStyle={{ width: 300, marginLeft: 10, color: '#FFF' }}
+                placeholderTextColor="#F1F1F1"
+                secureTextEntry={true}
                 inputContainerStyle={{borderBottomWidth: 0}}
                 containerStyle={{ width: 300, marginVertical: 10, marginBottom: 40, backgroundColor: 'rgb(101,101,101)', borderRadius: 2}}
-                placeholder='Usuario'
+                placeholder='Confirma la contrasena'
               />
             </View>
             <View>
               <Button
                 titleStyle={{color: "#FFF"}}
                 buttonStyle={styles.sendButton}
-                title="Enviar"
-                onPress={()=> this.props.navigation.navigate('ValidateCodeView')}
+                title="Restablecer Contrasena"
+                onPress={()=> this.props.navigation.navigate('SuccessResetPasswordView')}
               />
             </View>
           </KeyboardAvoidingView>
@@ -97,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sendButton: {
-    width: 150,
+    width: 200,
     backgroundColor: "rgb(237, 44, 56)",
   },
 });
