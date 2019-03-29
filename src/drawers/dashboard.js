@@ -6,11 +6,9 @@ import Dashboard from '../views/dashboard';
 
 const DashboardDrawerItem = createStackNavigator(
   {
-    Playground: { screen: Dashboard },
+    Playground: { screen: Dashboard },    
+
   },
-  {
-    headerMode: 'none',
-  }
 );
 
 DashboardDrawerItem.navigationOptions = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { registerRootComponent, AppLoading, Asset, Font } from 'expo';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { View, Image, Dimensions, Button, TouchableOpacity } from 'react-native';
-import { createDrawerNavigator, createAppContainer, DrawerItems } from 'react-navigation';
+import { NavigationActions, createDrawerNavigator, createAppContainer, DrawerItems } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import Dashboard from '../drawers/dashboard';
 import Users from '../drawers/users';
@@ -58,20 +58,6 @@ const MainRoot = createDrawerNavigator(
 const HomeContainer = createAppContainer(MainRoot);
 
 export default class Home extends React.Component {
-
-  static navigationOptions = {
-    headerLeft: (<Icon
-          name="menu"
-          size={30}
-          type="entypo"
-          iconStyle={{ paddingLeft: 10 }}
-          onPress={() => navigation.navigate('DrawerOpen')}
-        />),
-  };
-
-  state = {
-    isReady: false,
-  }
 
   render() {
     return <HomeContainer />;

@@ -6,11 +6,8 @@ import Users from '../views/users';
 
 const UserDrawerItem = createStackNavigator(
   {
-    Playground: { screen: Users },
+    UserView: { screen: Users },
   },
-  {
-    headerMode: 'none',
-  }
 );
 
 UserDrawerItem.navigationOptions = {

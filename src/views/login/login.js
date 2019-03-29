@@ -143,7 +143,7 @@ export default class Login extends Component {
                   activeOpacity={0.5}
                   titleStyle={{ color: '#000', fontSize: 15 }}
                   containerStyle={{ marginTop: -10 }}
-                  onPress={this.submitLoginCredentials.bind(this)}
+                  onPress={() => this.props.navigation.navigate('App')}
                   buttonStyle={{
                     paddingTop: 10,
                     paddingBottom: 10,

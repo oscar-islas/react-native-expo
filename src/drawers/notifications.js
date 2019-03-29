@@ -2,19 +2,20 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-import Pricing from '../views/pricing';
+import Dashboard from '../views/dashboard';
 
-const PricingDrawerItem = createStackNavigator({
-  Pricing: {
-    screen: Pricing,
+const DashboardDrawerItem = createStackNavigator(
+  {
+    Playground: { screen: Dashboard },
+
   },
-});
+);
 
-PricingDrawerItem.navigationOptions = {
-  drawerLabel: 'Pricing',
+DashboardDrawerItem.navigationOptions = {
+  drawerLabel: 'Notificaciones',
   drawerIcon: ({ tintColor }) => (
     <Icon
-      name="attach-money"
+      name="email"
       size={30}
       iconStyle={{
         width: 30,
@@ -26,4 +27,4 @@ PricingDrawerItem.navigationOptions = {
   ),
 };
 
-export default PricingDrawerItem;
+export default DashboardDrawerItem;
