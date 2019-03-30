@@ -6,7 +6,7 @@ import Dashboard from '../views/dashboard';
 
 const DashboardDrawerItem = createStackNavigator(
   {
-    Playground: { screen: Dashboard },    
+    Playground: { screen: Dashboard },
 
   },
 );
@@ -15,7 +15,7 @@ DashboardDrawerItem.navigationOptions = {
   drawerLabel: 'Dashboard',
   drawerIcon: ({ tintColor }) => (
     <Icon
-      name="email"
+      name="dashboard"
       size={30}
       iconStyle={{
         width: 30,

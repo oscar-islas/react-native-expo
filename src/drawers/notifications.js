@@ -15,13 +15,13 @@ DashboardDrawerItem.navigationOptions = {
   drawerLabel: 'Notificaciones',
   drawerIcon: ({ tintColor }) => (
     <Icon
-      name="email"
-      size={30}
+      name="bell"
+      size={25}
       iconStyle={{
         width: 30,
         height: 30,
       }}
-      type="material"
+      type="font-awesome"
       color={tintColor}
     />
   ),

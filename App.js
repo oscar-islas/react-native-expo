@@ -17,11 +17,11 @@ import Orders from './src/drawers/orders';
 import News from './src/drawers/news';
 import Notifications from './src/drawers/notifications';
 
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const CustomDrawerContentComponent = props => (
-  <View style={{ flex: 1, backgroundColor: '#FFF' }}>
+  <View style={{ flex: 1, backgroundColor: 'rgb(229, 225, 225)' }}>
     <View
       style={{ marginTop: 40, justifyContent: 'center', alignItems: 'center' }}
     >
@@ -31,8 +31,22 @@ const CustomDrawerContentComponent = props => (
         resizeMode="contain"
       />
     </View>
-    <View style={{ marginLeft: 10 }}>
-      <DrawerItems {...props} />
+    <View>
+      <DrawerItems style={{ paddingLeft: 10, borderBottomWidth: 10, borderColor: '#FFF' }} {...props} />
+      <Button
+        icon={
+          <Icon
+            name="power-off"
+            size={15}
+            color="white"
+            type="font-awesome"
+          />
+        }
+        title="Cerrar Sesion"
+        buttonStyle={styles.btnLogout}
+        containerStyle={{flexDirection: 'row',}}
+        titleStyle={{textAlign: 'left', marginLeft: 10, marginRight: 10}}
+        onPress={() => props.navigation.navigate('LoginView') }/>
     </View>
   </View>
 );
@@ -62,14 +76,14 @@ const MainRoot = createDrawerNavigator(
       screen: Notifications,
     },
     NewsView: {
-      screen: News
+      screen: News,
     },
   },
   {
     initialRouteName: 'DashboardView',
     contentOptions: {
-      activeTintColor: '#548ff7',
-      activeBackgroundColor: 'transparent',
+      activeTintColor: '#FFF',
+      activeBackgroundColor: 'rgb(237,44,56)',
       inactiveTintColor: '#000',
       inactiveBackgroundColor: 'transparent',
       labelStyle: {
@@ -153,5 +167,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  btnLogout: {
+    width: SCREEN_WIDTH * 0.8,
+    backgroundColor: "rgb(237,44,56)",
   },
 });

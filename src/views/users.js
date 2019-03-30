@@ -12,6 +12,16 @@ const dummySearchBarProps = {
   onChangeText: text => console.log('text:', text),
 };
 
+const UserRowItem = (props) => (
+  <View>
+    <Text style={styles.item}>{props.header}:{props.name}</Text>
+    <Text style={styles.item}>{props.header}:{props.name}</Text>
+    <Text style={styles.item}>{props.header}:{props.name}</Text>
+    <Text style={styles.item}>{props.header}:{props.name}</Text>
+    <Text style={styles.item}>{props.header}:{props.name}</Text>
+  </View>
+);
+
 export default class Users extends Component {
 
   static navigationOptions = ({ navigation }) => ({
@@ -49,10 +59,12 @@ export default class Users extends Component {
           />
         <SectionList
           sections={[
-            {title: 'D', data: ['Devin']},
-            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+            {title: 'D', data: [{ name:'Oswaldo', header:'Nombre'}]},
+            {title: 'J', data: [{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'}, { name:'Oswaldo', header:'Nombre'}, { name:'Oswaldo', header:'Nombre'}, { name:'Oswaldo', header:'Nombre'}]},
+            {title: 'O', data: [{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'}]},
+            {title: 'I', data: [{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'},{ name:'Oswaldo', header:'Nombre'}]}
           ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+          renderItem={({item}) => <UserRowItem {...item}/>}
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
           keyExtractor={(item, index) => index}
         />

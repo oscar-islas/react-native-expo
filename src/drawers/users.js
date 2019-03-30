@@ -11,16 +11,16 @@ const UserDrawerItem = createStackNavigator(
 );
 
 UserDrawerItem.navigationOptions = {
-  drawerLabel: 'Users',
+  drawerLabel: 'Usuarios',
   drawerIcon: ({ tintColor }) => (
     <Icon
-      name="email"
-      size={30}
+      name="users"
+      size={25}
       iconStyle={{
         width: 30,
         height: 30,
       }}
-      type="material"
+      type="font-awesome"
       color={tintColor}
     />
   ),
