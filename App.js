@@ -17,6 +17,8 @@ import Orders from './src/drawers/orders';
 import News from './src/drawers/news';
 import Notifications from './src/drawers/notifications';
 
+import UserForm from './src/views/user/userForm';
+
 import { Icon, Button } from 'react-native-elements';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -44,7 +46,7 @@ const CustomDrawerContentComponent = props => (
         }
         title="Cerrar Sesion"
         buttonStyle={styles.btnLogout}
-        containerStyle={{flexDirection: 'row',}}
+        containerStyle={{flexDirection: 'row', }}
         titleStyle={{textAlign: 'left', marginLeft: 10, marginRight: 10}}
         onPress={() => props.navigation.navigate('LoginView') }/>
     </View>
@@ -100,20 +102,8 @@ const MainRoot = createDrawerNavigator(
 );
 
 const AppStack = createStackNavigator({
-  Home: {
-    screen: Home,
-  },
-  ValidateUserView: {
-    screen: ValidateUser,
-  },
-  ValidateCodeView: {
-    screen: ValidateCode
-  },
-  NewPasswordFormView: {
-    screen: NewPasswordForm
-  },
-  SuccessResetPasswordView: {
-    screen: SuccessResetPassword
+  UserFormView: {
+    screen: UserForm,
   },
 });
 
@@ -140,6 +130,7 @@ const AppNavigator = createSwitchNavigator(
     AuthLoading: AuthLoadingScreen,
     App: MainRoot,
     Auth: AuthStack,
+    AppFlow: AppStack,
   },
   {
     initialRouteName: 'AuthLoading',
@@ -170,6 +161,7 @@ const styles = StyleSheet.create({
   },
   btnLogout: {
     width: SCREEN_WIDTH * 0.8,
+    borderRadius: 0,
     backgroundColor: "rgb(237,44,56)",
   },
 });

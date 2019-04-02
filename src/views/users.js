@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View, Text, ScrollView, Image, SectionList } from 'react-native';
+import { StyleSheet, Button, View, Text, ScrollView, Image, SectionList, TouchableOpacity } from 'react-native';
 import { Icon, SearchBar } from 'react-native-elements';
+import { createStackNavigator } from 'react-navigation';
 
 const dummySearchBarProps = {
   showLoading: false,
@@ -49,6 +50,8 @@ export default class Users extends Component {
 
   render() {
 
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <SearchBar
@@ -68,6 +71,14 @@ export default class Users extends Component {
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
           keyExtractor={(item, index) => index}
         />
+          <TouchableOpacity
+            style={styles.addButtonList}
+            onPress={() => navigate('UserFormView', { title: 'Agregar Usuario'} )}>
+            <Icon name="plus"
+              size={20}
+              type="font-awesome"
+              color="#FFF" />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -86,6 +97,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     backgroundColor: 'rgba(247,247,247,1.0)',
+  },
+  addButtonList : {
+    alignItems:'center',
+    justifyContent:'center',
+    width:60,
+    height:60,
+    position: 'absolute',
+    bottom: 15,
+    right: 15,
+    backgroundColor:'#42b05c',
+    borderRadius:100,
+    elevation: 5,
   },
   item: {
     padding: 10,
