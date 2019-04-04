@@ -73,7 +73,7 @@ export default class Users extends Component {
         />
           <TouchableOpacity
             style={styles.addButtonList}
-            onPress={() => navigate('UserFormView', { title: 'Agregar Usuario'} )}>
+            onPress={() => navigate('UserFormView', { title: 'Crear usuario'} )}>
             <Icon name="plus"
               size={20}
               type="font-awesome"

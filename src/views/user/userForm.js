@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Button, View, Text, ScrollView, Image, SectionList, TouchableOpacity, BackHandler, KeyboardAvoidingView } from 'react-native';
-import { Icon, Input } from 'react-native-elements';
+import { StyleSheet, View, Text, ScrollView, Image, SectionList, TouchableOpacity, BackHandler, KeyboardAvoidingView } from 'react-native';
+import { Icon, Input, Button } from 'react-native-elements';
 import { Header } from 'react-navigation';
-
+import t from 'tcomb-form-native';
 
 const BackButton = (
   <Icon
@@ -14,9 +14,60 @@ const BackButton = (
   />
 );
 
+const regEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
 const focus = () => {
   this.input.focus();
 }
+
+const Email = t.refinement(t.String, email => regEmail.test(email) && email.length > 0);
+
+Email.getValidationErrorMessage = email => {
+  if(!email){
+    return 'Este campo es requerido';
+  }else if(!regEmail.test(email)){
+    return 'Ingresa un correo electronico valido';
+  }
+}
+
+const Form = t.form.Form;
+
+const User = t.struct({
+  name: t.String,
+  lastname: t.String,
+  username: t.String,
+  email: Email,
+  password: t.String
+});
+
+const options = {
+  fields: {
+    name: {
+      label: 'Nombre(s)',
+      error: 'Este campo es requerido'
+    },
+    lastname: {
+      label: 'Apellidos',
+      error: 'Este campo es requerido'
+    },
+    username: {
+      label: 'Usuario',
+      error: 'Este campo es requerido'
+    },
+    email: {
+      label: 'Correo electronico',
+    },
+    password: {
+      label: 'Contrasena',
+      error: 'Este campo es requerido',
+      password: true,
+      secureTextEntry: true
+    },
+    rpassword: {
+      label: 'Repite tu contrasena'
+    }
+  },
+};
 
 export default class UserForm extends Component {
 
@@ -38,6 +89,11 @@ export default class UserForm extends Component {
     return true;
   };
 
+  handleSubmit = () => {
+    const value = this._form.getValue(); // use that ref to get the form value
+    console.log('value: ', value);
+  }
+
   static navigationOptions = ({navigation}) => ({
       title: navigation.getParam('title', 'DefaultTitle'),
       headerLeft :(   <Icon
@@ -55,65 +111,15 @@ export default class UserForm extends Component {
         <KeyboardAvoidingView keyboardVerticalOffset = {Header.HEIGHT + 40} style={styles.formContainer} behavior="padding" enabled>
           <ScrollView>
             <View>
-              <Input
-                inputStyle={styles.inputForm}
-                placeholderTextColor="#F1F1F1"
-                label="Nombre(s)"
-                labelStyle={styles.labelForm}
-                inputContainerStyle={styles.inputContainerForm}
-                containerStyle={styles.containerForm}
-                returnKeyType='next'
-                onSubmitEditing={() => {this.lastname.focus()}}
-              />
-              <Input
-                inputStyle={styles.inputForm}
-                placeholderTextColor="#F1F1F1"
-                label="Apellidos"
-                labelStyle={styles.labelForm}
-                inputContainerStyle={styles.inputContainerForm}
-                containerStyle={styles.containerForm}
-                returnKeyType='next'
-                ref={(input) => this.lastname = input}
-                onSubmitEditing={() => this.username.focus()}
-              />
-              <Input
-                inputStyle={styles.inputForm}
-                placeholderTextColor="#F1F1F1"
-                label="Usuario"
-                labelStyle={styles.labelForm}
-                inputContainerStyle={styles.inputContainerForm}
-                containerStyle={styles.containerForm}
-                returnKeyType='next'
-                ref={ (input) => this.username = input}
-                onSubmitEditing={() => this.email.focus()}
-              />
-              <Input
-                inputStyle={styles.inputForm}
-                placeholderTextColor="#F1F1F1"
-                label="Email"
-                labelStyle={styles.labelForm}
-                inputContainerStyle={styles.inputContainerForm}
-                containerStyle={styles.containerForm}
-                returnKeyType='next'
-                ref={ (input) => this.email = input}
-                onSubmitEditing={() => this.password.focus()}
-              />
-              <Input
-                inputStyle={styles.inputForm}
-                placeholderTextColor="#F1F1F1"
-                label="Contrasena"
-                labelStyle={styles.labelForm}
-                inputContainerStyle={styles.inputContainerForm}
-                containerStyle={styles.containerForm}
-                returnKeyType='next'
-                ref={ (input) => this.password = input}
-              />
-              <Button
-                titleStyle={{color: "#FFF"}}
-                buttonStyle={styles.sendButton}
-                title="Guardar Usuario"
-                onPress={() => alert('hola') }
-              />
+            <Form
+              ref={c => this._form = c} // assign a ref
+              type={User}
+              options={options}
+            />
+            <Button
+              title="Guardar"
+              onPress={this.handleSubmit}
+            />
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
@@ -127,8 +133,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     alignItems: 'stretch',
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 15,
+    marginBottom: 10
   },
   sectionHeader: {
     paddingTop: 2,
