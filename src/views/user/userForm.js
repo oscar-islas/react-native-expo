@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, ScrollView, Image, SectionList, TouchableOpacit
 import { Icon, Input, Button } from 'react-native-elements';
 import { Header } from 'react-navigation';
 import t from 'tcomb-form-native';
+import _ from 'lodash';
 
 const BackButton = (
   <Icon
@@ -20,6 +21,15 @@ const focus = () => {
   this.input.focus();
 }
 
+// clone the default stylesheet
+const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
+
+// overriding the text color
+stylesheet.select.normal.borderWidth = 2;
+stylesheet.select.normal.borderRadius = 4;
+stylesheet.select.normal.borderColor = '#cccccc';
+
+
 const Email = t.refinement(t.String, email => regEmail.test(email) && email.length > 0);
 
 Email.getValidationErrorMessage = email => {
@@ -32,15 +42,23 @@ Email.getValidationErrorMessage = email => {
 
 const Form = t.form.Form;
 
+const Roles = t.enums({
+    '1': 'Administrador',
+    '2': 'Cliente',
+    '3': 'Proveedor'
+}, 'Rol');
+
 const User = t.struct({
   name: t.String,
   lastname: t.String,
   username: t.String,
   email: Email,
-  password: t.String
+  password: t.String,
+  role: Roles,
 });
 
 const options = {
+  stylesheet: stylesheet,
   fields: {
     name: {
       label: 'Nombre(s)',
@@ -65,7 +83,11 @@ const options = {
     },
     rpassword: {
       label: 'Repite tu contrasena'
-    }
+    },
+    role: {
+      label: 'Rol',
+      nullOption: {value: '', text: 'Selecciona un rol para el usuario'}
+    },
   },
 };
 
@@ -74,6 +96,11 @@ export default class UserForm extends Component {
   constructor(props){
       super(props)
       this.handleBackPress = this.handleBackPress.bind(this);
+      this.state = {
+        initialvalues: {
+          role:'2',
+        },
+      }
   }
 
   componentDidMount() {
@@ -110,11 +137,12 @@ export default class UserForm extends Component {
       <View style={styles.container}>
         <KeyboardAvoidingView keyboardVerticalOffset = {Header.HEIGHT + 40} style={styles.formContainer} behavior="padding" enabled>
           <ScrollView>
-            <View>
+            <View style={{paddingLeft: 15, paddingRight: 15}}>
             <Form
               ref={c => this._form = c} // assign a ref
               type={User}
               options={options}
+              value={this.state.initialvalues}
             />
             <Button
               title="Guardar"
@@ -133,10 +161,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     alignItems: 'stretch',
-    paddingLeft: 15,
-    paddingRight: 15,
     paddingTop: 15,
     marginBottom: 10
+  },
+  selectInput: {
+    borderWidth: 2,
+    backgroundColor: '#000'
   },
   sectionHeader: {
     paddingTop: 2,
