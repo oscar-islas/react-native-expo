@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View, Text, ScrollView, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import UserHeaderData from '../components/userHeaderDataComponent';
 
 export default class News extends Component {
 

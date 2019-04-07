@@ -46,7 +46,7 @@ export default class SuccessResetPassword extends Component {
                 titleStyle={{color: "#FFF"}}
                 buttonStyle={styles.sendButton}
                 title="Iniciar Sesion"
-                onPress={()=> this.props.navigation.navigate('Home')}
+                onPress={()=> this.props.navigation.navigate('LoginView')}
               />
             </View>
           </View>

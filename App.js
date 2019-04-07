@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
+import { Alert, StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 import { NavigationActions, createStackNavigator, createSwitchNavigator, createDrawerNavigator, createAppContainer, DrawerItems } from 'react-navigation';
 
 
@@ -21,6 +21,22 @@ import UserForm from './src/views/user/userForm';
 
 import { Icon, Button } from 'react-native-elements';
 const SCREEN_WIDTH = Dimensions.get('window').width;
+
+const logout = props => {
+  Alert.alert(
+    'Cerrar Sesión',
+    '¿Deseas cerrar tu sesión en este dispositivo?',
+  [
+    {
+      text: 'Cancelar',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'Aceptar', onPress: () => props.navigate('LoginView')},
+  ],
+  {cancelable: false},
+  );
+}
 
 const CustomDrawerContentComponent = props => (
   <View style={{ flex: 1, backgroundColor: 'rgb(229, 225, 225)' }}>
@@ -48,7 +64,7 @@ const CustomDrawerContentComponent = props => (
         buttonStyle={styles.btnLogout}
         containerStyle={{flexDirection: 'row', }}
         titleStyle={{textAlign: 'left', marginLeft: 10, marginRight: 10}}
-        onPress={() => props.navigation.navigate('LoginView') }/>
+        onPress={() => logout(props.navigation) }/>
     </View>
   </View>
 );

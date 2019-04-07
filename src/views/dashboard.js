@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
+import UserHeaderData from '../components/userHeaderDataComponent';
 
 export default class Dashboard extends Component {
+
+  componentWillMount(){
+    this.props.navigation.setParams({headerOptionsUserData: false});
+  }
 
   static navigationOptions = ({ navigation }) => ({
     headerLeft :<Icon
@@ -12,12 +17,13 @@ export default class Dashboard extends Component {
     containerStyle={{ marginLeft: 10 }}
     onPress={() => navigation.openDrawer()}
     />,
+    headerRight: navigation.getParam('headerOptionsUserData') ? null : (<UserHeaderData />),
   });
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Compenente para ver el dashboard</Text>
+        <Text>Componente para ver el dashboard</Text>
       </View>
     );
   }

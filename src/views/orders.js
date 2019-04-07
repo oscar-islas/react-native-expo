@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Button, View, Text, ScrollView, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
+import UserHeaderData from '../components/userHeaderDataComponent';
 
 export default class Orders extends Component {
 
@@ -33,7 +34,7 @@ export default class Orders extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>Compenente para administrar las ordenes</Text>
+        <Text>Componente para administrar las ordenes</Text>
       </View>
     );
   }
