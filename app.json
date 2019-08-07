@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Bepensa App",
-    "slug": "bepensa-app-android",
+    "slug": "bepensa-app",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
